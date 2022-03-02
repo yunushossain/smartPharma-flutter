@@ -59,11 +59,11 @@ class _SupplierPageState extends State<SupplierPage> {
 
   Future<void>  getSupplierData() async {
     final res =
-    await _http.getData("http://192.168.1.51:8082/supplier/getAll");
+    await _http.getData("http://192.168.0.106:8082/supplier/getAll");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       var data = map['Data'] as List<dynamic>;
-      print("Invoice list console printed");
+      print("Supplier list console printed");
       setState(() {
         slist = data.map((e) => Supplier.fromMap(e)).toList();
 

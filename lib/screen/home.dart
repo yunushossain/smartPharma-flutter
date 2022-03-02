@@ -6,7 +6,7 @@ import 'package:smartpharma/screen/dashboard.dart';
 import 'package:smartpharma/screen/customer.dart';
 import 'package:smartpharma/screen/my_drawer_header.dart';
 import 'package:smartpharma/screen/medecine.dart';
-import 'package:smartpharma/screen/notifications.dart';
+import 'package:smartpharma/screen/purchase.dart';
 import 'package:smartpharma/screen/report.dart';
 import 'package:smartpharma/screen/search.dart';
 import 'package:smartpharma/screen/supplier.dart';

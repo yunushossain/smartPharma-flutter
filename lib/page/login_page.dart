@@ -35,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
 
     try {
       final response =
-          await _http.postData('http://192.168.1.51:8082/login', _body);
+          await _http.postData('http://192.168.0.106:8082/login', _body);
       print(response.toString());
 
       Navigator.of(context).push(MaterialPageRoute(builder: (context)=> HomePage()));
@@ -75,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                   alignment: Alignment.center,
                   padding: const EdgeInsets.all(30),
                   child: const Text(
-                    'User Login',
+                    'Admin Login',
                     style: TextStyle(
                         color: Colors.blue,
                         fontWeight: FontWeight.w900,
