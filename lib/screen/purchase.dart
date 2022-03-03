@@ -41,15 +41,6 @@ class _PurchasePageState extends State<PurchasePage> {
         DataColumn(
           label: Text('Mdecine'),
         ),
-        DataColumn(
-          label: Text('Quantity'),
-        ),
-        DataColumn(
-          label: Text('Rate'),
-        ),
-        DataColumn(
-          label: Text('Total amount'),
-        ),
 
 
       ], rows: [
@@ -59,9 +50,7 @@ class _PurchasePageState extends State<PurchasePage> {
             DataCell(Text(plist[i].pstdate)),
             DataCell(Text(plist[i].sname)),
             DataCell(Text(plist[i].mname)),
-            DataCell(Text(plist[i].quantity.toString())),
-            DataCell(Text(plist[i].rate.toString())),
-            DataCell(Text(plist[i].gtotal.toString())),
+
 
           ])
       ]),
@@ -71,7 +60,7 @@ class _PurchasePageState extends State<PurchasePage> {
 
   Future<void> getPurchaseData() async {
     final res =
-    await _http.getData("http://192.168.0.106:8082/purchase/getAll");
+    await _http.getData("http://192.168.1.51:8082/purchase/getAll");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       var data = map['Data'] as List<dynamic>;

@@ -39,9 +39,7 @@ class _SupplierPageState extends State<SupplierPage> {
         DataColumn(
           label: Text('Contact'),
         ),
-        DataColumn(
-          label: Text('Address'),
-        ),
+
 
       ], rows: [
         for (int i = 0; i < 2; i++)
@@ -50,7 +48,7 @@ class _SupplierPageState extends State<SupplierPage> {
             DataCell(Text(slist[i].sname)),
             DataCell(Text(slist[i].semail)),
             DataCell(Text(slist[i].scontact)),
-            DataCell(Text(slist[i].saddress)),
+
 
           ])
       ]),
@@ -59,7 +57,7 @@ class _SupplierPageState extends State<SupplierPage> {
 
   Future<void>  getSupplierData() async {
     final res =
-    await _http.getData("http://192.168.0.106:8082/supplier/getAll");
+    await _http.getData("http://192.168.1.51:8082/supplier/getAll");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       var data = map['Data'] as List<dynamic>;

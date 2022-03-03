@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
@@ -8,22 +7,14 @@ import 'package:smartpharma/helper/http_helper.dart';
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
 
-
-
-
-
   @override
   _DashboardPageState createState() => _DashboardPageState();
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: GridView.count(
         primary: false,
         padding: const EdgeInsets.all(20),
@@ -31,41 +22,409 @@ class _DashboardPageState extends State<DashboardPage> {
         mainAxisSpacing: 20,
         crossAxisCount: 2,
         children: <Widget>[
+          Container(
+            padding: const EdgeInsets.all(8),
 
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 60.0,top: 8),
+                    child: Row(
+                      children: [
+                        Icon(Icons.person_add)
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Total Customer"  ,
+                            textAlign: TextAlign.center,
+                             style: TextStyle(fontSize: 20),
+
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 60.0,top: 8),
+                    child: Row(
+                      children: [
+                       Text(totalCustomer.toString(),
+                         style: TextStyle(fontSize: 20),
+                       )
+                      ],
+                    ),
+                  ),
+
+
+
+                ],
+              ),
+
+
+
+
+
+
+            color: Colors.teal[200],
+          ),
 
           Container(
             padding: const EdgeInsets.all(8),
 
-            child:  Text("Total Customer " + " :  " +  totalCustomer.toString(), textAlign: TextAlign.center,),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 60.0,top: 8),
+                  child: Row(
+                    children: [
+                      Icon(Icons.person_add)
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Total Supplier"  ,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20),
+
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 60.0,top: 8),
+                  child: Row(
+                    children: [
+                      Text(totalSupplier.toString(),
+                        style: TextStyle(fontSize: 20),
+                      )
+                    ],
+                  ),
+                ),
+
+
+
+              ],
+            ),
+
+
+
+
+
+
+            color: Colors.teal[200],
+          ),
+
+          Container(
+            padding: const EdgeInsets.all(8),
+
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 60.0,top: 8),
+                  child: Row(
+                    children: [
+                      Icon(Icons.medical_services)
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Total Medecine"  ,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20),
+
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 60.0,top: 8),
+                  child: Row(
+                    children: [
+                      Text(" 12 ",
+                        style: TextStyle(fontSize: 20),
+                      )
+                    ],
+                  ),
+                ),
+
+
+
+              ],
+            ),
+
+
+
+
+
+
+            color: Colors.teal[200],
+          ),
+
+          Container(
+            padding: const EdgeInsets.all(8),
+
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 60.0,top: 8),
+                  child: Row(
+                    children: [
+                      Icon(Icons.business)
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Total Invoice"  ,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20),
+
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 60.0,top: 8),
+                  child: Row(
+                    children: [
+                      Text(" 5 ",
+                        style: TextStyle(fontSize: 20),
+                      )
+                    ],
+                  ),
+                ),
+
+
+
+              ],
+            ),
+
+
+
+
+
+
+            color: Colors.teal[200],
+          ),
+
+          Container(
+            padding: const EdgeInsets.all(8),
+
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 60.0,top: 8),
+                  child: Row(
+                    children: [
+                      Icon(Icons.shopping_bag)
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Total Sales"  ,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20),
+
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 60.0,top: 8),
+                  child: Row(
+                    children: [
+                      Text(" 0 ",
+                        style: TextStyle(fontSize: 20),
+                      )
+                    ],
+                  ),
+                ),
+
+
+
+              ],
+            ),
+
+
+
+
+
+
             color: Colors.teal[200],
           ),
           Container(
+            padding: const EdgeInsets.all(8),
 
-            padding: const EdgeInsets.all(8),
-            child: Text("Total Supplier "  + " : " +  totalSupplier.toString(),textAlign: TextAlign.center,),
-            color: Colors.teal[300],
-          ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            child:  Text("Total Medecine" + " : " + " 9 ", textAlign: TextAlign.center,),
-            color: Colors.teal[400],
-          ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            child: Text("Out Of Stock" + " : " + " 2 ", textAlign: TextAlign.center,),
-            color: Colors.teal[500],
-          ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            child: Text("Expried" + " : " + " 0 ", textAlign: TextAlign.center,),
-            color: Colors.teal[600],
-          ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            child:   Text("Total Invoice" + " : " + " 7 ", textAlign: TextAlign.center,),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 60.0,top: 8),
+                  child: Row(
+                    children: [
+                      Icon(Icons.shopping_cart )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Total Purchase"  ,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20),
 
-            color: Colors.teal[600],
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 60.0,top: 8),
+                  child: Row(
+                    children: [
+                      Text(" 0 ",
+                        style: TextStyle(fontSize: 20),
+                      )
+                    ],
+                  ),
+                ),
+
+
+
+              ],
+            ),
+
+
+
+
+
+
+            color: Colors.teal[200],
           ),
+
+          Container(
+            padding: const EdgeInsets.all(8),
+
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 60.0,top: 8),
+                  child: Row(
+                    children: [
+                      Icon(Icons.outbond )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Out of stock"  ,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20),
+
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 60.0,top: 8),
+                  child: Row(
+                    children: [
+                      Text(" 0 ",
+                        style: TextStyle(fontSize: 20),
+                      )
+                    ],
+                  ),
+                ),
+
+
+
+              ],
+            ),
+
+
+
+
+
+
+            color: Colors.teal[200],
+          ),
+
+
+          Container(
+            padding: const EdgeInsets.all(8),
+
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 60.0,top: 8),
+                  child: Row(
+                    children: [
+                      Icon(Icons.outbond )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Expried"  ,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20),
+
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 60.0,top: 8),
+                  child: Row(
+                    children: [
+                      Text(" 0 ",
+                        style: TextStyle(fontSize: 20),
+                      )
+                    ],
+                  ),
+                ),
+
+
+
+              ],
+            ),
+
+
+
+
+
+
+            color: Colors.teal[200],
+          ),
+
+
+
+
 
 
         ],
@@ -100,9 +459,8 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   Future<void> getTotalCustomer() async {
-
-    final res =
-        await _http.getData("http://192.168.0.106:8082/customer/getTotalCustomer");
+    final res = await _http
+        .getData("http://192.168.1.51:8082/customer/getTotalCustomer");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       print(map['Data']);
@@ -114,9 +472,8 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   Future<void> getTotalSupplier() async {
-
-    final res =
-    await _http.getData("http://192.168.0.106:8082/supplier/getTotalSupplier");
+    final res = await _http
+        .getData("http://192.168.1.51:8082/supplier/getTotalSupplier");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       print(map['Data']);

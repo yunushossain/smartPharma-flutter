@@ -23,6 +23,7 @@ class _CustomerPageState extends State<CustomerPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
+
       child: DataTable(columns: const [
         DataColumn(
           label: Text('ID'),
@@ -63,11 +64,11 @@ class _CustomerPageState extends State<CustomerPage> {
 
   Future<void> getCustomerData() async {
     final res =
-    await _http.getData("http://192.168.0.106:8082/customer/getAll");
+    await _http.getData("http://192.168.1.51:8082/customer/getAll");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       var data = map['Data'] as List<dynamic>;
-      print("Invoice list console printed");
+      print("Customer list console printed");
       setState(() {
         clist = data.map((e) => Customer.fromMap(e)).toList();
 
