@@ -25,7 +25,12 @@ class _MedecinePageState extends State<MedecinePage> {
   Widget build(BuildContext context) {
     return Container(
 
-      child: DataTable(columns: const [
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+       DataTable(columns: const [
 
         DataColumn(
           label: Text('ID'),
@@ -56,6 +61,9 @@ class _MedecinePageState extends State<MedecinePage> {
 
           ])
       ]),
+    ],
+    ),
+    ),
     );
   }
 
