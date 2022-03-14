@@ -1,4 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:smartpharma/helper/http_helper.dart';
+import 'package:smartpharma/page/model/AddCustomer.dart';
 
 class AddcustomerPage extends StatefulWidget {
   @override
@@ -6,6 +11,7 @@ class AddcustomerPage extends StatefulWidget {
 }
 
 class _AddcustomerPageState extends State<AddcustomerPage> {
+  final _http = HttpHelper();
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _mobileController = TextEditingController();
@@ -115,5 +121,43 @@ class _AddcustomerPageState extends State<AddcustomerPage> {
                 )),
           ],
         ));
+  }
+  Future<void> addCustomer() async {
+    String cname = _nameController.value.text;
+    String cemail = _emailController.value.text;
+    String ccontact = _mobileController.value.text;
+    String caddress = _addressController.value.text;
+    String cdname = _doctorNameController.value.text;
+    String cdaddress = _doctorAddressController.value.text;
+
+    var model =
+    AddCustomer(cname: cname, cemail: cemail, ccontact: ccontact, caddress: caddress,cdname:cdname,cdaddress:cdaddress);
+    String _body = jsonEncode(model.toMap());
+
+    try {
+      final response = await _http.postData(host + '/customer/save', _body);
+
+      Fluttertoast.showToast(
+          msg: "New Customer added Successfully",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 3,
+          fontSize: 20,
+          backgroundColor: Colors.green);
+      _nameController.clear();
+      _emailController.clear();
+      _mobileController.clear();
+      _addressController.clear();
+    } catch (e) {
+      log(e.toString());
+      Fluttertoast.showToast(
+          msg: "$e",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
   }
 }
