@@ -31,7 +31,7 @@ class _MyHeaderDrawerState extends State<MyHeaderDrawer> {
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
           Text(
-            "smartpharma",
+            " ",
             style: TextStyle(
               color: Colors.grey[200],
               fontSize: 8,

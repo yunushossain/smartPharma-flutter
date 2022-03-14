@@ -1,9 +1,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:smartpharma/screen/invoice.dart';
+import 'package:smartpharma/screen/addcustomer.dart';
+import 'package:smartpharma/screen/addinvoice.dart';
+import 'package:smartpharma/screen/addmedicine.dart';
+import 'package:smartpharma/screen/addsupplier.dart';
+import 'package:smartpharma/screen/invoices.dart';
 import 'package:smartpharma/screen/dashboard.dart';
-import 'package:smartpharma/screen/customer.dart';
+import 'package:smartpharma/screen/customers.dart';
 import 'package:smartpharma/screen/my_drawer_header.dart';
 import 'package:smartpharma/screen/medecine.dart';
 import 'package:smartpharma/screen/purchase.dart';
@@ -24,15 +28,28 @@ class _HomePageState extends State<HomePage> {
     var container;
     if (currentPage == DrawerSections.dashboard) {
       container = DashboardPage();
-    } else if (currentPage == DrawerSections.invoice) {
+    } else if (currentPage == DrawerSections.invoices) {
       container =InvoicePage();
-    } else if (currentPage == DrawerSections.customer) {
+    }
+    else if (currentPage == DrawerSections.addinvoice) {
+      container =AddinvoicePage();
+    }
+    else if (currentPage == DrawerSections.customers) {
       container = CustomerPage();
-    } else if (currentPage == DrawerSections.medecine) {
+    }
+    else if (currentPage == DrawerSections.addcustomer) {
+      container = AddcustomerPage();
+    }else if (currentPage == DrawerSections.medecines) {
       container = MedecinePage();
-    } else if (currentPage == DrawerSections.supplier) {
+    }
+    else if (currentPage == DrawerSections.addmedicine) {
+      container = AddmedicinePage();
+    }else if (currentPage == DrawerSections.suppliers) {
       container = SupplierPage();
-    } else if (currentPage == DrawerSections.purchase) {
+    }
+    else if (currentPage == DrawerSections.addsupplier) {
+      container = AddsupplierPage();
+    }else if (currentPage == DrawerSections.purchase) {
       container = PurchasePage();
     } else if (currentPage == DrawerSections.report) {
       container = ReportPage();
@@ -71,21 +88,29 @@ class _HomePageState extends State<HomePage> {
         children: [
           menuItem(1, "Dashboard", Icons.dashboard_outlined,
               currentPage == DrawerSections.dashboard ? true : false),
-          menuItem(2, "Invoice", Icons.business,
-              currentPage == DrawerSections.invoice ? true : false),
-          menuItem(3, "Customer", Icons.people,
-              currentPage == DrawerSections.customer ? true : false),
-          menuItem(4, "Medecine", Icons.medical_services,
-              currentPage == DrawerSections.medecine ? true : false),
+          menuItem(2, "Invoices", Icons.business,
+              currentPage == DrawerSections.invoices ? true : false),
+          menuItem(3, "AddInvoice", Icons.business,
+              currentPage == DrawerSections.invoices ? true : false),
+          menuItem(4, "Customers", Icons.people,
+              currentPage == DrawerSections.customers ? true : false),
+          menuItem(5, "Add Customer", Icons.people,
+              currentPage == DrawerSections.customers ? true : false),
+          menuItem(6, "Medecine", Icons.medical_services,
+              currentPage == DrawerSections.medecines ? true : false),
+          menuItem(7, "Add Medecine", Icons.medical_services,
+              currentPage == DrawerSections.medecines ? true : false),
           Divider(),
-          menuItem(5, "Supplier", Icons.people,
-              currentPage == DrawerSections.supplier ? true : false),
-          menuItem(6, "Purchase", Icons.shopping_cart,
+          menuItem(8, "Suppliers", Icons.people,
+              currentPage == DrawerSections.suppliers ? true : false),
+          menuItem(9, "Add Supplier", Icons.people,
+              currentPage == DrawerSections.addsupplier ? true : false),
+          menuItem(10, "Purchase", Icons.shopping_cart,
               currentPage == DrawerSections.purchase ? true : false),
           Divider(),
-          menuItem(7, "Report", Icons.privacy_tip_outlined,
+          menuItem(11, "Report", Icons.privacy_tip_outlined,
               currentPage == DrawerSections.report ? true : false),
-          menuItem(8, "Search", Icons.feedback_outlined,
+          menuItem(12, "Search", Icons.feedback_outlined,
               currentPage == DrawerSections.search ? true : false),
         ],
       ),
@@ -102,18 +127,30 @@ class _HomePageState extends State<HomePage> {
             if (id == 1) {
               currentPage = DrawerSections.dashboard;
             } else if (id == 2) {
-              currentPage = DrawerSections.invoice;
-            } else if (id == 3) {
-              currentPage = DrawerSections.customer;
-            } else if (id == 4) {
-              currentPage = DrawerSections.medecine;
-            } else if (id == 5) {
-              currentPage = DrawerSections.supplier;
-            } else if (id == 6) {
+              currentPage = DrawerSections.invoices;
+            }else if (id == 3) {
+              currentPage = DrawerSections.addinvoice;
+            }
+            else if (id == 4) {
+              currentPage = DrawerSections.customers;
+            }
+            else if (id == 5) {
+              currentPage = DrawerSections.addcustomer;
+            }else if (id == 6) {
+              currentPage = DrawerSections.medecines;
+            }
+            else if (id == 7) {
+              currentPage = DrawerSections.addmedicine;
+            }else if (id == 8) {
+              currentPage = DrawerSections.suppliers;
+            }
+            else if (id == 9) {
+              currentPage = DrawerSections.addsupplier;
+            }else if (id == 10) {
               currentPage = DrawerSections.purchase;
-            } else if (id == 7) {
+            } else if (id == 11) {
               currentPage = DrawerSections.report;
-            } else if (id == 8) {
+            } else if (id == 12) {
               currentPage = DrawerSections.search;
             }
           });
@@ -149,10 +186,14 @@ class _HomePageState extends State<HomePage> {
 
 enum DrawerSections {
   dashboard,
-  invoice,
-  customer,
-  medecine,
-  supplier,
+  invoices,
+  addinvoice,
+  customers,
+  addcustomer,
+  medecines,
+  addmedicine,
+  suppliers,
+  addsupplier,
   purchase,
   report,
   search,
