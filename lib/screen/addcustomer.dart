@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -18,6 +19,7 @@ class _AddcustomerPageState extends State<AddcustomerPage> {
   final _addressController = TextEditingController();
   final _doctorNameController = TextEditingController();
   final _doctorAddressController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -77,7 +79,7 @@ class _AddcustomerPageState extends State<AddcustomerPage> {
             Container(
               padding: const EdgeInsets.fromLTRB(30, 15, 30, 0),
               child: TextField(
-                controller: _addressController,
+                controller: _doctorNameController,
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: ' Doctor Name',
@@ -87,7 +89,7 @@ class _AddcustomerPageState extends State<AddcustomerPage> {
             Container(
               padding: const EdgeInsets.fromLTRB(30, 15, 30, 0),
               child: TextField(
-                controller: _addressController,
+                controller: _doctorAddressController,
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: ' Doctor Address',
@@ -102,12 +104,11 @@ class _AddcustomerPageState extends State<AddcustomerPage> {
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      primary: Color.fromRGBO(49, 87, 110, 1.0)
-                  ),
+                      primary: Color.fromRGBO(49, 87, 110, 1.0)),
                   child: const Text(
                     'Add',
                     style:
-                    TextStyle(fontSize: 20.0, fontWeight: FontWeight.w900),
+                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.w900),
                   ),
                   onPressed: () {
                     print(_nameController.text);
@@ -116,12 +117,13 @@ class _AddcustomerPageState extends State<AddcustomerPage> {
                     print(_addressController.text);
                     print(_doctorNameController.text);
                     print(_doctorAddressController.text);
-
+                    addCustomer();
                   },
                 )),
           ],
         ));
   }
+
   Future<void> addCustomer() async {
     String cname = _nameController.value.text;
     String cemail = _emailController.value.text;
@@ -130,12 +132,18 @@ class _AddcustomerPageState extends State<AddcustomerPage> {
     String cdname = _doctorNameController.value.text;
     String cdaddress = _doctorAddressController.value.text;
 
-    var model =
-    AddCustomer(cname: cname, cemail: cemail, ccontact: ccontact, caddress: caddress,cdname:cdname,cdaddress:cdaddress);
+    var model = AddCustomer(
+        cname: cname,
+        cemail: cemail,
+        ccontact: ccontact,
+        caddress: caddress,
+        cdname: cdname,
+        cdaddress: cdaddress);
     String _body = jsonEncode(model.toMap());
 
     try {
-      final response = await _http.postData(host + '/customer/save', _body);
+      final response =
+          await _http.postData('http://192.168.1.51:8082/customer/save', _body);
 
       Fluttertoast.showToast(
           msg: "New Customer added Successfully",
@@ -148,6 +156,8 @@ class _AddcustomerPageState extends State<AddcustomerPage> {
       _emailController.clear();
       _mobileController.clear();
       _addressController.clear();
+      _doctorNameController.clear();
+      _doctorAddressController.clear();
     } catch (e) {
       log(e.toString());
       Fluttertoast.showToast(

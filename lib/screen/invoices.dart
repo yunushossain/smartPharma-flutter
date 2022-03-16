@@ -26,7 +26,6 @@ class _InvoicePageState extends State<InvoicePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(

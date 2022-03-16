@@ -10,6 +10,11 @@ class _AddmedicinePageState extends State<AddmedicinePage> {
   final _emailController = TextEditingController();
   final _mobileController = TextEditingController();
   final _addressController = TextEditingController();
+  // final _coursesController = TextEditingController();
+
+
+  var courseTypes = ["Gave","Jee","WPS"];
+  var selectedCourseType;
 
   @override
   Widget build(BuildContext context) {
@@ -57,16 +62,28 @@ class _AddmedicinePageState extends State<AddmedicinePage> {
                     hintText: "Type your Phone number"),
               ),
             ),
+
+
             Container(
               padding: const EdgeInsets.fromLTRB(30, 15, 30, 0),
-              child: TextField(
-                controller: _addressController,
+              child: DropdownButtonFormField(
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: ' Supplier Name',
                     hintText: "Type your Address"),
+                items: courseTypes.map((String coursetype){
+                  return DropdownMenuItem(
+                    value: coursetype,
+                    child: Text(coursetype),
+                  );
+                }).toList(),
+                onChanged: (newValue){
+                  setState(() => selectedCourseType = newValue);
+                },
+                value: selectedCourseType,
               ),
             ),
+
 
 
             const SizedBox(
@@ -88,8 +105,7 @@ class _AddmedicinePageState extends State<AddmedicinePage> {
                     print(_nameController.text);
                     print(_emailController.text);
                     print(_mobileController.text);
-                    print(_addressController.text);
-
+                    print(selectedCourseType);
 
                   },
                 )),

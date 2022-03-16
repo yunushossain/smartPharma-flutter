@@ -47,7 +47,7 @@ class _SupplierPageState extends State<SupplierPage> {
 
 
       ], rows: [
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < slist.length; i++)
           DataRow(cells: [
             DataCell(Text(slist[i].sid.toString())),
             DataCell(Text(slist[i].sname)),

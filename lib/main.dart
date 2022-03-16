@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:smartpharma/page/login_page.dart';
+import 'package:smartpharma/screen/dashboard.dart';
+
+import 'bottom_navigation_bar.dart';
 
 
 void main() {

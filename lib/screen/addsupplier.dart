@@ -1,4 +1,10 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:smartpharma/helper/http_helper.dart';
+import 'package:smartpharma/page/model/AddSupplier.dart';
 
 class AddsupplierPage extends StatefulWidget {
   @override
@@ -6,6 +12,7 @@ class AddsupplierPage extends StatefulWidget {
 }
 
 class _AddsupplierPageState extends State<AddsupplierPage> {
+  final _http = HttpHelper();
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _mobileController = TextEditingController();
@@ -33,7 +40,7 @@ class _AddsupplierPageState extends State<AddsupplierPage> {
                 controller: _nameController,
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Customer Name',
+                    labelText: 'Supplier Name',
                     hintText: "Type your Fullname"),
               ),
             ),
@@ -43,7 +50,7 @@ class _AddsupplierPageState extends State<AddsupplierPage> {
                 controller: _emailController,
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: ' Customer Email',
+                    labelText: ' Supplier Email',
                     hintText: "Type your Email ID"),
               ),
             ),
@@ -53,7 +60,7 @@ class _AddsupplierPageState extends State<AddsupplierPage> {
                 controller: _mobileController,
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: ' Customer Contact',
+                    labelText: ' Supplier Contact',
                     hintText: "Type your Phone number"),
               ),
             ),
@@ -63,7 +70,7 @@ class _AddsupplierPageState extends State<AddsupplierPage> {
                 controller: _addressController,
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: ' Customer Address',
+                    labelText: ' Supplier Address',
                     hintText: "Type your Address"),
               ),
             ),
@@ -89,6 +96,7 @@ class _AddsupplierPageState extends State<AddsupplierPage> {
                     print(_emailController.text);
                     print(_mobileController.text);
                     print(_addressController.text);
+                    addSupplier();
 
 
                   },
@@ -96,4 +104,51 @@ class _AddsupplierPageState extends State<AddsupplierPage> {
           ],
         ));
   }
+
+  Future<void> addSupplier() async {
+    String sname = _nameController.value.text;
+    String semail = _emailController.value.text;
+    String scontact = _mobileController.value.text;
+    String saddress = _addressController.value.text;
+
+
+    var model = AddSupplier(
+        sname: sname,
+        semail: semail,
+        scontact: scontact,
+        saddress: saddress);
+
+    String _body = jsonEncode(model.toMap());
+
+    try {
+      final response =
+      await _http.postData('http://192.168.1.51:8082/supplier/save', _body);
+
+      Fluttertoast.showToast(
+          msg: "New Customer added Successfully",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 3,
+          fontSize: 20,
+          backgroundColor: Colors.green);
+      _nameController.clear();
+      _emailController.clear();
+      _mobileController.clear();
+      _addressController.clear();
+
+
+    } catch (e) {
+      log(e.toString());
+      Fluttertoast.showToast(
+          msg: "$e",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
+  }
+
+
 }

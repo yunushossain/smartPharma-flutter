@@ -50,7 +50,7 @@ class _CustomerPageState extends State<CustomerPage> {
                 label: Text('Doctor Address'),
               ),
             ], rows: [
-              for (int i = 0; i < 2; i++)
+              for (int i = 0; i < clist.length; i++)
                 DataRow(cells: [
                   DataCell(Text(clist[i].cid.toString())),
                   DataCell(Text(clist[i].cname)),
