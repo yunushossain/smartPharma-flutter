@@ -27,40 +27,76 @@ class _CustomerPageState extends State<CustomerPage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            DataTable(columns: const [
-              DataColumn(
-                label: Text('ID'),
-              ),
-              DataColumn(
-                label: Text('Name'),
-              ),
-              DataColumn(
-                label: Text('Email'),
-              ),
-              DataColumn(
-                label: Text('Contact'),
-              ),
-              DataColumn(
-                label: Text('Address'),
-              ),
-              DataColumn(
-                label: Text('Doctor Name'),
-              ),
-              DataColumn(
-                label: Text('Doctor Address'),
-              ),
-            ], rows: [
-              for (int i = 0; i < clist.length; i++)
-                DataRow(cells: [
-                  DataCell(Text(clist[i].cid.toString())),
-                  DataCell(Text(clist[i].cname)),
-                  DataCell(Text(clist[i].cemail)),
-                  DataCell(Text(clist[i].ccontact)),
-                  DataCell(Text(clist[i].caddress)),
-                  DataCell(Text(clist[i].cdname)),
-                  DataCell(Text(clist[i].cdaddress)),
-                ])
-            ]),
+            Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(20),
+                  child: Text(
+                    "Customers",
+                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                DataTable(
+                    headingRowColor: MaterialStateColor.resolveWith(
+                        (states) => Colors.green),
+                    columns: [
+                      DataColumn(
+                        label: Text(
+                          'ID',
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'Name',
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'Email',
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'Contact',
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'Address',
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'Doctor Name',
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'Doctor Address',
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                        ),
+                      ),
+                    ],
+                    rows: [
+                      for (int i = 0; i < clist.length; i++)
+                        DataRow(cells: [
+                          DataCell(Text(clist[i].cid.toString())),
+                          DataCell(Text(clist[i].cname)),
+                          DataCell(Text(clist[i].cemail)),
+                          DataCell(Text(clist[i].ccontact)),
+                          DataCell(Text(clist[i].caddress)),
+                          DataCell(Text(clist[i].cdname)),
+                          DataCell(Text(clist[i].cdaddress)),
+                        ])
+                    ]),
+              ],
+            ),
           ],
         ),
       ),

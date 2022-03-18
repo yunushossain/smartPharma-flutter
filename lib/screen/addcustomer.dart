@@ -32,7 +32,7 @@ class _AddcustomerPageState extends State<AddcustomerPage> {
                 child: const Text(
                   'Add new Customer',
                   style: TextStyle(
-                      color: Color.fromRGBO(49, 87, 110, 1.0),
+                      color: Colors.black,
                       fontWeight: FontWeight.w900,
                       fontSize: 30),
                 )),
@@ -104,7 +104,8 @@ class _AddcustomerPageState extends State<AddcustomerPage> {
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      primary: Color.fromRGBO(49, 87, 110, 1.0)),
+                      primary: Colors.green
+                  ),
                   child: const Text(
                     'Add',
                     style:

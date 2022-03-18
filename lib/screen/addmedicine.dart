@@ -94,7 +94,7 @@ class _AddmedicinePageState extends State<AddmedicinePage> {
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      primary: Color.fromRGBO(49, 87, 110, 1.0)
+                      primary: Colors.green
                   ),
                   child: const Text(
                     'Add',

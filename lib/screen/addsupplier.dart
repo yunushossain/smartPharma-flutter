@@ -30,7 +30,7 @@ class _AddsupplierPageState extends State<AddsupplierPage> {
                 child: const Text(
                   'Add new Supplier',
                   style: TextStyle(
-                      color: Color.fromRGBO(49, 87, 110, 1.0),
+                      color: Colors.black54,
                       fontWeight: FontWeight.w900,
                       fontSize: 30),
                 )),
@@ -84,7 +84,7 @@ class _AddsupplierPageState extends State<AddsupplierPage> {
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      primary: Color.fromRGBO(49, 87, 110, 1.0)
+                      primary: Colors.green
                   ),
                   child: const Text(
                     'Add',

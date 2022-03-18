@@ -31,42 +31,57 @@ class _InvoicePageState extends State<InvoicePage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            DataTable(columns: const [
-
-              DataColumn(
-                label: Text('Invo Num'),
+            Column(
+              children: [    Padding(
+                padding: EdgeInsets.all(20),
+                child: Text(
+                  "Invoices",
+                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                ),
               ),
-              DataColumn(
-                label: Text('Customer Name'),
-              ),
-              DataColumn(
-                label: Text('Date'),
-              ),
+                DataTable(
+                    headingRowColor: MaterialStateColor.resolveWith(
+                            (states) => Colors.green),
+                    columns: const [
 
-              DataColumn(
-                label: Text('Total Amount'),
-              ),
-              DataColumn(
-                label: Text('Total Discount'),
-              ),
-              DataColumn(
-                label: Text(' Net Total '),
-              ),
+                  DataColumn(
+                    label: Text('Invo Num',
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Text('Customer Name', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                  ),
+                  DataColumn(
+                    label: Text('Date', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                  ),
+
+                  DataColumn(
+                    label: Text('Total Amount', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                  ),
+                  DataColumn(
+                    label: Text('Total Discount', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                  ),
+                  DataColumn(
+                    label: Text(' Net Total ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                  ),
 
 
-            ], rows: [
-              for (int i = 0; i <invlist.length; i++)
-                DataRow(cells: [
-                  DataCell(Text(invlist[i].id.toString())),
-                  DataCell(Text(invlist[i].customerName)),
-                  DataCell(Text(invlist[i].date)),
-                  DataCell(Text(invlist[i].totalAmount.toString())),
-                  DataCell(Text(invlist[i].totalDiscount.toString())),
-                  DataCell(Text(invlist[i].netTotal.toString())),
+                ], rows: [
+                  for (int i = 0; i <invlist.length; i++)
+                    DataRow(cells: [
+                      DataCell(Text(invlist[i].id.toString())),
+                      DataCell(Text(invlist[i].customerName)),
+                      DataCell(Text(invlist[i].date)),
+                      DataCell(Text(invlist[i].totalAmount.toString())),
+                      DataCell(Text(invlist[i].totalDiscount.toString())),
+                      DataCell(Text(invlist[i].netTotal.toString())),
 
 
-                ])
-            ]),
+                    ])
+                ]),
+              ],
+            ),
           ],
         ),
       ),

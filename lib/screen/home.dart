@@ -13,7 +13,7 @@ import 'package:smartpharma/screen/medecine.dart';
 import 'package:smartpharma/screen/purchase.dart';
 import 'package:smartpharma/screen/report.dart';
 import 'package:smartpharma/screen/search.dart';
-import 'package:smartpharma/screen/supplier.dart';
+import 'package:smartpharma/screen/suppliers.dart';
 
 class HomePage extends StatefulWidget {
   @override
