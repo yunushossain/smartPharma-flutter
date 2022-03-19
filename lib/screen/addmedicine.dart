@@ -1,4 +1,12 @@
+import 'dart:convert';
+import 'dart:developer';
+
+import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:smartpharma/helper/http_helper.dart';
+import 'package:smartpharma/page/model/AddMedicine.dart';
+import 'package:smartpharma/page/model/Supplier.dart';
 
 class AddmedicinePage extends StatefulWidget {
   @override
@@ -6,15 +14,25 @@ class AddmedicinePage extends StatefulWidget {
 }
 
 class _AddmedicinePageState extends State<AddmedicinePage> {
-  final _nameController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _mobileController = TextEditingController();
-  final _addressController = TextEditingController();
-  // final _coursesController = TextEditingController();
+  List<Supplier> slist = [];
 
+
+  final _http = HttpHelper();
+  final _mnameController = TextEditingController();
+  final _mgnameController = TextEditingController();
+  final _mpakingController = TextEditingController();
+  final _snameController = TextEditingController();
+  // final _coursesController = TextEditingController();
 
   var courseTypes = ["Gave","Jee","WPS"];
   var selectedCourseType;
+  late String supplier;
+
+  @override
+  void initState(){
+    supplier = "";
+    getSupplierData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +53,7 @@ class _AddmedicinePageState extends State<AddmedicinePage> {
             Container(
               padding: const EdgeInsets.fromLTRB(30, 10, 30, 0),
               child: TextField(
-                controller: _nameController,
+                controller: _mnameController,
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Medicine Name',
@@ -45,7 +63,7 @@ class _AddmedicinePageState extends State<AddmedicinePage> {
             Container(
               padding: const EdgeInsets.fromLTRB(30, 15, 30, 0),
               child: TextField(
-                controller: _emailController,
+                controller: _mgnameController,
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: ' Generic name',
@@ -55,7 +73,7 @@ class _AddmedicinePageState extends State<AddmedicinePage> {
             Container(
               padding: const EdgeInsets.fromLTRB(30, 15, 30, 0),
               child: TextField(
-                controller: _mobileController,
+                controller: _mpakingController,
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: ' Paking',
@@ -64,26 +82,48 @@ class _AddmedicinePageState extends State<AddmedicinePage> {
             ),
 
 
-            Container(
-              padding: const EdgeInsets.fromLTRB(30, 15, 30, 0),
-              child: DropdownButtonFormField(
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: ' Supplier Name',
-                    hintText: "Type your Address"),
-                items: courseTypes.map((String coursetype){
-                  return DropdownMenuItem(
-                    value: coursetype,
-                    child: Text(coursetype),
-                  );
-                }).toList(),
-                onChanged: (newValue){
-                  setState(() => selectedCourseType = newValue);
+          Container(
+            padding: EdgeInsets.only(left: 16, top: 25),
+            child: DropDownFormField(
+              hintText: 'Select supplier',
+              value: supplier,
+              // onSaved: (value) {
+              //   setState(() {
+              //     _myActivity = value;
+              //     print(_myActivity);
+              //   });
+              // },
+              onChanged: (value) {
+                setState(() {
+                  print(supplier);
+                  supplier = value;
+                });
+              },
+              dataSource: [
+
+                {
+                  "display": "Square",
+                  "value": "Square",
                 },
-                value: selectedCourseType,
-              ),
+                {
+                  "display": "Drug",
+                  "value": "Drug",
+                },
+                {
+                  "display": "Incepta",
+                  "value": "Incepta",
+                },
+                {
+                  "display": "SkF",
+                  "value": "SkF",
+                }
+              ],
+              textField: 'display',
+              valueField: 'value',
             ),
 
+
+          ),
 
 
             const SizedBox(
@@ -102,14 +142,80 @@ class _AddmedicinePageState extends State<AddmedicinePage> {
                     TextStyle(fontSize: 20.0, fontWeight: FontWeight.w900),
                   ),
                   onPressed: () {
-                    print(_nameController.text);
-                    print(_emailController.text);
-                    print(_mobileController.text);
-                    print(selectedCourseType);
+
+
+                    print(_mgnameController.text);
+                    print(_mgnameController.text);
+                    print(_mpakingController.text);
+                    //print(selectedCourseType);
+                    print(supplier);
+                    addMedicine();
 
                   },
                 )),
           ],
         ));
   }
+
+  Future<void> addMedicine() async {
+    String mname = _mnameController.value.text;
+    String mgname = _mgnameController.value.text;
+    String mpaking = _mpakingController.value.text;
+   String sname = supplier;
+
+
+    var model =  AddMedicine(
+        mname: mname,
+        mgname: mgname,
+        mpaking: mpaking,
+        sname: sname);
+
+    String _body = jsonEncode(model.toMap());
+
+    try {
+      final response =
+      await _http.postData('http://192.168.1.51:8082/medicine/save', _body);
+        if(response.statusCode == 200) {
+          Fluttertoast.showToast(
+              msg: "New Customer added Successfully",
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 3,
+              fontSize: 20,
+              backgroundColor: Colors.green);
+          _mnameController.clear();
+          _mgnameController.clear();
+          _mpakingController.clear();
+          _snameController.clear();
+        }
+
+    } catch (e) {
+      log(e.toString());
+      Fluttertoast.showToast(
+          msg: "$e",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
+  }
+
+
+  Future<void>  getSupplierData() async {
+    final res =
+    await _http.getData("http://192.168.1.51:8082/supplier/getAll");
+    if (res.statusCode == 200) {
+      Map<String, dynamic> map = jsonDecode(res.body);
+      var data = map['Data'] as List<dynamic>;
+      print("Supplier list console printed");
+      setState(() {
+        slist = data.map((e) => Supplier.fromMap(e)).toList();
+
+      });
+    }
+  }
+
 }
+
