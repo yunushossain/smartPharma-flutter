@@ -9,6 +9,13 @@ import 'package:smartpharma/page/model/AddMedicine.dart';
 import 'package:smartpharma/page/model/Supplier.dart';
 
 class AddmedicinePage extends StatefulWidget {
+
+  late final sname;
+
+  AddmedicinePage({
+  this.sname
+});
+
   @override
   _AddmedicinePageState createState() => _AddmedicinePageState();
 }
@@ -22,6 +29,9 @@ class _AddmedicinePageState extends State<AddmedicinePage> {
   final _mgnameController = TextEditingController();
   final _mpakingController = TextEditingController();
   final _snameController = TextEditingController();
+    Supplier sp=new Supplier(sid: (0), sname: "", semail: "", scontact: "scontact", saddress: "");
+
+
   // final _coursesController = TextEditingController();
 
   var courseTypes = ["Gave","Jee","WPS"];
@@ -32,13 +42,16 @@ class _AddmedicinePageState extends State<AddmedicinePage> {
   void initState(){
     supplier = "";
     getSupplierData();
+
   }
+
 
   @override
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.all(10),
         child: ListView(
+
           children: <Widget>[
             Container(
                 alignment: Alignment.center,
@@ -55,7 +68,7 @@ class _AddmedicinePageState extends State<AddmedicinePage> {
               child: TextField(
                 controller: _mnameController,
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
+                    border: UnderlineInputBorder(),
                     labelText: 'Medicine Name',
                     hintText: "Type Medicine Name"),
               ),
@@ -65,7 +78,7 @@ class _AddmedicinePageState extends State<AddmedicinePage> {
               child: TextField(
                 controller: _mgnameController,
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
+                    border: UnderlineInputBorder(),
                     labelText: ' Generic name',
                     hintText: "Type your Email ID"),
               ),
@@ -75,7 +88,7 @@ class _AddmedicinePageState extends State<AddmedicinePage> {
               child: TextField(
                 controller: _mpakingController,
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
+                    border: UnderlineInputBorder(),
                     labelText: ' Paking',
                     hintText: "Type your Phone number"),
               ),
@@ -85,6 +98,7 @@ class _AddmedicinePageState extends State<AddmedicinePage> {
           Container(
             padding: EdgeInsets.only(left: 16, top: 25),
             child: DropDownFormField(
+
               hintText: 'Select supplier',
               value: supplier,
               // onSaved: (value) {
@@ -99,27 +113,21 @@ class _AddmedicinePageState extends State<AddmedicinePage> {
                   supplier = value;
                 });
               },
+
               dataSource: [
+                for(var i = 0; i< slist.length; i++){
+                 sp = slist[i]
+                },
 
                 {
-                  "display": "Square",
-                  "value": "Square",
+                  "display": sp.sname,
+                  "value": sp.sname,
                 },
-                {
-                  "display": "Drug",
-                  "value": "Drug",
-                },
-                {
-                  "display": "Incepta",
-                  "value": "Incepta",
-                },
-                {
-                  "display": "SkF",
-                  "value": "SkF",
-                }
+
               ],
-              textField: 'display',
-              valueField: 'value',
+              textField: "display",
+              valueField:"value",
+
             ),
 
 
@@ -177,7 +185,7 @@ class _AddmedicinePageState extends State<AddmedicinePage> {
       await _http.postData('http://192.168.1.51:8082/medicine/save', _body);
         if(response.statusCode == 200) {
           Fluttertoast.showToast(
-              msg: "New Customer added Successfully",
+              msg: "New Medecine added Successfully",
               toastLength: Toast.LENGTH_LONG,
               gravity: ToastGravity.CENTER,
               timeInSecForIosWeb: 3,
@@ -209,10 +217,11 @@ class _AddmedicinePageState extends State<AddmedicinePage> {
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       var data = map['Data'] as List<dynamic>;
-      print("Supplier list console printed");
+
       setState(() {
         slist = data.map((e) => Supplier.fromMap(e)).toList();
 
+        print(slist);
       });
     }
   }

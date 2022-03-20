@@ -9,8 +9,8 @@ import 'package:smartpharma/screen/invoices.dart';
 import 'package:smartpharma/screen/dashboard.dart';
 import 'package:smartpharma/screen/customers.dart';
 import 'package:smartpharma/screen/my_drawer_header.dart';
-import 'package:smartpharma/screen/medecine.dart';
-import 'package:smartpharma/screen/purchase.dart';
+import 'package:smartpharma/screen/medicines.dart';
+import 'package:smartpharma/screen/purchases.dart';
 import 'package:smartpharma/screen/report.dart';
 import 'package:smartpharma/screen/search.dart';
 import 'package:smartpharma/screen/suppliers.dart';
@@ -49,11 +49,11 @@ class _HomePageState extends State<HomePage> {
     }
     else if (currentPage == DrawerSections.addsupplier) {
       container = AddsupplierPage();
-    }else if (currentPage == DrawerSections.purchase) {
+    }else if (currentPage == DrawerSections.purchases) {
       container = PurchasePage();
-    } else if (currentPage == DrawerSections.report) {
+    } else if (currentPage == DrawerSections.addpurchase) {
       container = ReportPage();
-    } else if (currentPage == DrawerSections.search) {
+    } else if (currentPage == DrawerSections.logout) {
       container =  SearchPage();
     }
     return Scaffold(
@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
               currentPage == DrawerSections.customers ? true : false),
           menuItem(5, "Add Customer", Icons.people,
               currentPage == DrawerSections.customers ? true : false),
-          menuItem(6, "Medecine", Icons.medical_services,
+          menuItem(6, "Medecines", Icons.medical_services,
               currentPage == DrawerSections.medecines ? true : false),
           menuItem(7, "Add Medecine", Icons.medical_services,
               currentPage == DrawerSections.medecines ? true : false),
@@ -105,13 +105,13 @@ class _HomePageState extends State<HomePage> {
               currentPage == DrawerSections.suppliers ? true : false),
           menuItem(9, "Add Supplier", Icons.people,
               currentPage == DrawerSections.addsupplier ? true : false),
-          menuItem(10, "Purchase", Icons.shopping_cart,
-              currentPage == DrawerSections.purchase ? true : false),
+          menuItem(10, "Purchases", Icons.shopping_cart,
+              currentPage == DrawerSections.purchases ? true : false),
           Divider(),
-          menuItem(11, "Report", Icons.privacy_tip_outlined,
-              currentPage == DrawerSections.report ? true : false),
-          menuItem(12, "Search", Icons.feedback_outlined,
-              currentPage == DrawerSections.search ? true : false),
+          menuItem(11, "AddPurchase", Icons.privacy_tip_outlined,
+              currentPage == DrawerSections.addpurchase ? true : false),
+          menuItem(12, "Logout", Icons.feedback_outlined,
+              currentPage == DrawerSections.logout ? true : false),
         ],
       ),
     );
@@ -147,11 +147,11 @@ class _HomePageState extends State<HomePage> {
             else if (id == 9) {
               currentPage = DrawerSections.addsupplier;
             }else if (id == 10) {
-              currentPage = DrawerSections.purchase;
+              currentPage = DrawerSections.purchases;
             } else if (id == 11) {
-              currentPage = DrawerSections.report;
+              currentPage = DrawerSections.addpurchase;
             } else if (id == 12) {
-              currentPage = DrawerSections.search;
+              currentPage = DrawerSections.logout;
             }
           });
         },
@@ -194,7 +194,7 @@ enum DrawerSections {
   addmedicine,
   suppliers,
   addsupplier,
-  purchase,
-  report,
-  search,
+  purchases,
+  addpurchase,
+  logout,
 }
