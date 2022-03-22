@@ -116,13 +116,14 @@ class _AddmedicinePageState extends State<AddmedicinePage> {
 
               dataSource: [
                 for(var i = 0; i< slist.length; i++){
-                 sp = slist[i]
+
+
+                    "display": slist[i].sname,
+                    "value": slist[i].sname,
+
                 },
 
-                {
-                  "display": sp.sname,
-                  "value": sp.sname,
-                },
+
 
               ],
               textField: "display",
@@ -182,7 +183,7 @@ class _AddmedicinePageState extends State<AddmedicinePage> {
 
     try {
       final response =
-      await _http.postData('http://192.168.1.51:8082/medicine/save', _body);
+      await _http.postData('http://192.168.0.106:8082/medicine/save', _body);
         if(response.statusCode == 200) {
           Fluttertoast.showToast(
               msg: "New Medecine added Successfully",
@@ -213,7 +214,7 @@ class _AddmedicinePageState extends State<AddmedicinePage> {
 
   Future<void>  getSupplierData() async {
     final res =
-    await _http.getData("http://192.168.1.51:8082/supplier/getAll");
+    await _http.getData("http://192.168.0.106:8082/supplier/getAll");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       var data = map['Data'] as List<dynamic>;

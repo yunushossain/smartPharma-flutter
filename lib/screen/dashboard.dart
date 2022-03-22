@@ -152,7 +152,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   padding: const EdgeInsets.only(left: 60.0,top: 8),
                   child: Row(
                     children: [
-                      Text(" 12 ",
+                      Text(totalMedicine.toString(),
                         style: TextStyle(fontSize: 20),
                       )
                     ],
@@ -202,7 +202,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   padding: const EdgeInsets.only(left: 60.0,top: 8),
                   child: Row(
                     children: [
-                      Text(" 5 ",
+                      Text(totalInvoice.toString(),
                         style: TextStyle(fontSize: 20),
                       )
                     ],
@@ -301,7 +301,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   padding: const EdgeInsets.only(left: 60.0,top: 8),
                   child: Row(
                     children: [
-                      Text(" 0 ",
+                      Text(totalPurchase.toString(),
                         style: TextStyle(fontSize: 20),
                       )
                     ],
@@ -451,16 +451,22 @@ class _DashboardPageState extends State<DashboardPage> {
   final _http = new HttpHelper();
   var totalCustomer;
   var totalSupplier;
+  var totalPurchase;
+  var totalMedicine;
+  var totalInvoice;
 
   @override
   void initState() {
     getTotalCustomer();
     getTotalSupplier();
+    getTotalPurchase();
+    getTotalMedicine();
+    getTotalInvoice();
   }
 
   Future<void> getTotalCustomer() async {
     final res = await _http
-        .getData("http://192.168.1.51:8082/customer/getTotalCustomer");
+        .getData("http://192.168.0.106:8082/customer/getTotalCustomer");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       print(map['Data']);
@@ -473,13 +479,52 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Future<void> getTotalSupplier() async {
     final res = await _http
-        .getData("http://192.168.1.51:8082/supplier/getTotalSupplier");
+        .getData("http://192.168.0.106:8082/supplier/getTotalSupplier");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       print(map['Data']);
       print("Today Supplier console printed");
       setState(() {
         totalSupplier = map['Data'];
+      });
+    }
+  }
+
+  Future<void> getTotalPurchase() async {
+    final res = await _http
+        .getData("http://192.168.0.106:8082/purchase/getTotalPurchase");
+    if (res.statusCode == 200) {
+      Map<String, dynamic> map = jsonDecode(res.body);
+      print(map['Data']);
+      print("Today Purchase console printed");
+      setState(() {
+        totalPurchase = map['Data'];
+      });
+    }
+  }
+
+  Future<void> getTotalMedicine() async {
+    final res = await _http
+        .getData("http://192.168.0.106:8082/medicine/getTotalMedicine");
+    if (res.statusCode == 200) {
+      Map<String, dynamic> map = jsonDecode(res.body);
+      print(map['Data']);
+      print("Today Purchase console printed");
+      setState(() {
+        totalMedicine = map['Data'];
+      });
+    }
+  }
+
+  Future<void> getTotalInvoice() async {
+    final res = await _http
+        .getData("http://192.168.0.106:8082/showinvoice/getTotalInvoice");
+    if (res.statusCode == 200) {
+      Map<String, dynamic> map = jsonDecode(res.body);
+      print(map['Data']);
+      print("Today Purchase console printed");
+      setState(() {
+        totalInvoice = map['Data'];
       });
     }
   }
