@@ -98,7 +98,7 @@ class _PurchasePageState extends State<PurchasePage> {
 
   Future<void> getPurchaseData() async {
     final res =
-    await _http.getData("http://192.168.1.51:8082/purchase/getAll");
+    await _http.getData("http://192.168.0.106:8082/purchase/getAll");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       var data = map['Data'] as List<dynamic>;

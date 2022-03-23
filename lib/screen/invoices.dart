@@ -91,7 +91,7 @@ class _InvoicePageState extends State<InvoicePage> {
 
   Future<void> getInvoiceData() async {
     final res =
-    await _http.getData("http://192.168.1.51:8082/showinvoice/getAll");
+    await _http.getData("http://192.168.0.106:8082/showinvoice/getAll");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       var data = map['Data'] as List<dynamic>;

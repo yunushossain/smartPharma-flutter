@@ -110,7 +110,7 @@ class _HomePageState extends State<HomePage> {
           menuItem(10, "Purchases", Icons.shopping_cart,
               currentPage == DrawerSections.purchases ? true : false),
           Divider(),
-          menuItem(11, "AddPurchase", Icons.privacy_tip_outlined,
+          menuItem(11, "AddPurchase", Icons.shopping_cart,
               currentPage == DrawerSections.addpurchase ? true : false),
           // menuItem(12, "Logout", Icons.feedback_outlined,
           //     currentPage == DrawerSections.logout ? true : false),

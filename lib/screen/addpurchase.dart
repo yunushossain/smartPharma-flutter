@@ -5,7 +5,8 @@ import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smartpharma/helper/http_helper.dart';
-import 'package:smartpharma/page/model/AddMedicine.dart';
+
+import 'package:smartpharma/page/model/AddPurchase.dart';
 import 'package:smartpharma/page/model/Purchase.dart';
 import 'package:smartpharma/page/model/Supplier.dart';
 
@@ -16,7 +17,10 @@ class AddpurchasePage  extends StatefulWidget {
 
   AddpurchasePage({
     this.sname
+
+
   });
+
 
   @override
   _AddpurchasePageState createState() => _AddpurchasePageState();
@@ -28,11 +32,15 @@ class _AddpurchasePageState extends State<AddpurchasePage> {
 
 
   final _http = HttpHelper();
-  final _mnameController = TextEditingController();
-  final _mgnameController = TextEditingController();
-  final _mpakingController = TextEditingController();
+  final _pdateController = TextEditingController();
+   final _quantityController = TextEditingController();
+  final _rateController = TextEditingController();
+  final _amountController = TextEditingController();
   final _snameController = TextEditingController();
+  final _mnameController = TextEditingController();
   Supplier sp=new Supplier(sid: (0), sname: "", semail: "", scontact: "scontact", saddress: "");
+  Purchase ps =new Purchase(pid: (0), sname: "", pinvonum: (0), ppaytype: "", pstdate: "", mname: "", mpaking: "", batchid: "", expdate: "", quantity: (0), mrp: (0), rate: (0), amount: (0), gtotal: (0));
+
 
 
   // final _coursesController = TextEditingController();
@@ -75,6 +83,7 @@ class _AddpurchasePageState extends State<AddpurchasePage> {
               child: DropDownFormField(
 
                 hintText: 'Select supplier',
+                titleText: 'Supplier Name',
                 value: supplier,
                 // onSaved: (value) {
                 //   setState(() {
@@ -112,7 +121,7 @@ class _AddpurchasePageState extends State<AddpurchasePage> {
             Container(
               padding: const EdgeInsets.fromLTRB(30, 10, 30, 0),
               child: TextField(
-                controller: _mnameController,
+                controller: _pdateController,
                 decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
                     labelText: 'Purchase Date',
@@ -122,8 +131,8 @@ class _AddpurchasePageState extends State<AddpurchasePage> {
             Container(
               padding: EdgeInsets.only(left: 16, top: 25),
               child: DropDownFormField(
-
-                hintText: 'Select purchase',
+                titleText: 'Medicine Name',
+                hintText: 'Select Medicine',
                 value: purchase,
                 // onSaved: (value) {
                 //   setState(() {
@@ -162,7 +171,7 @@ class _AddpurchasePageState extends State<AddpurchasePage> {
             Container(
               padding: const EdgeInsets.fromLTRB(30, 15, 30, 0),
               child: TextField(
-                controller: _mgnameController,
+                controller: _quantityController,
                 decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
                     labelText: 'Quantity',
@@ -172,7 +181,7 @@ class _AddpurchasePageState extends State<AddpurchasePage> {
             Container(
               padding: const EdgeInsets.fromLTRB(30, 15, 30, 0),
               child: TextField(
-                controller: _mpakingController,
+                controller: _rateController,
                 decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
                     labelText: 'Rate',
@@ -182,7 +191,7 @@ class _AddpurchasePageState extends State<AddpurchasePage> {
             Container(
               padding: const EdgeInsets.fromLTRB(30, 15, 30, 0),
               child: TextField(
-                controller: _mpakingController,
+                controller: _amountController,
                 decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
                     labelText: 'Total Amount',
@@ -210,13 +219,16 @@ class _AddpurchasePageState extends State<AddpurchasePage> {
                   ),
                   onPressed: () {
 
+                    print(_snameController.text);
+                    print(_pdateController.text);
+                    print(_mnameController.text);
+                    print(_quantityController.text);
+                    print(_rateController.text);
+                    print(_amountController.text);
 
-                    print(_mgnameController.text);
-                    print(_mgnameController.text);
-                    print(_mpakingController.text);
-                    //print(selectedCourseType);
                     print(supplier);
-                    addMedicine();
+                    print(purchase);
+                    addPurchase();
 
                   },
                 )),
@@ -224,24 +236,29 @@ class _AddpurchasePageState extends State<AddpurchasePage> {
         ));
   }
 
-  Future<void> addMedicine() async {
-    String mname = _mnameController.value.text;
-    String mgname = _mgnameController.value.text;
-    String mpaking = _mpakingController.value.text;
+  Future<void> addPurchase() async {
+
+    String pstdate =_pdateController.value.text;
+    int quantity = int.parse(_quantityController.value.text);
+    double rate =double.parse(_quantityController.value.text);
+    double amount = double.parse(_quantityController.value.text);
     String sname = supplier;
+    String mname = purchase;
 
 
-    var model =  AddMedicine(
+    var model =  AddPurchase(
         mname: mname,
-        mgname: mgname,
-        mpaking: mpaking,
+        pstdate: pstdate,
+        quantity: quantity,
+        rate: rate,
+        amount: amount,
         sname: sname);
 
     String _body = jsonEncode(model.toMap());
 
     try {
       final response =
-      await _http.postData('http://192.168.1.51:8082/medicine/save', _body);
+      await _http.postData('http://192.168.0.106:8082/purchase/save', _body);
       if(response.statusCode == 200) {
         Fluttertoast.showToast(
             msg: "New Medecine added Successfully",
@@ -251,9 +268,11 @@ class _AddpurchasePageState extends State<AddpurchasePage> {
             fontSize: 20,
             backgroundColor: Colors.green);
         _mnameController.clear();
-        _mgnameController.clear();
-        _mpakingController.clear();
+        _quantityController.clear();
+        _rateController.clear();
         _snameController.clear();
+        _pdateController.clear();
+        _amountController.clear();
       }
 
     } catch (e) {
@@ -272,7 +291,7 @@ class _AddpurchasePageState extends State<AddpurchasePage> {
 
   Future<void>  getSupplierData() async {
     final res =
-    await _http.getData("http://192.168.1.51:8082/supplier/getAll");
+    await _http.getData("http://192.168.0.106:8082/supplier/getAll");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       var data = map['Data'] as List<dynamic>;
@@ -287,7 +306,7 @@ class _AddpurchasePageState extends State<AddpurchasePage> {
 
   Future<void> getPurchaseData() async {
     final res =
-    await _http.getData("http://192.168.1.51:8082/purchase/getAll");
+    await _http.getData("http://192.168.0.106:8082/purchase/getAll");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       var data = map['Data'] as List<dynamic>;
