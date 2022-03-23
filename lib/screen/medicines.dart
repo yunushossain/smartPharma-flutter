@@ -86,7 +86,7 @@ class _MedecinePageState extends State<MedecinePage> {
 
   Future<void> getMedecineData() async {
     final res =
-    await _http.getData("http://192.168.0.106:8082/medicine/getAll");
+    await _http.getData("http://192.168.1.51:8082/medicine/getAll");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       var data = map['Data'] as List<dynamic>;

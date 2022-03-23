@@ -48,9 +48,9 @@ class _PurchasePageState extends State<PurchasePage> {
 
                columns:  [
 
-            DataColumn(
-              label: Text('Inv Num', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-            ),
+            // DataColumn(
+            //   label: Text('Inv Num', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+            // ),
             DataColumn(
               label: Text('Purchase date',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
             ),
@@ -61,15 +61,28 @@ class _PurchasePageState extends State<PurchasePage> {
             DataColumn(
               label: Text('Mdecine',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
             ),
+                 DataColumn(
+                   label: Text('Quantity',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                 ),
+                 DataColumn(
+                   label: Text('Rate',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                 ),
+                 DataColumn(
+                   label: Text('Total Amount',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                 ),
 
 
-      ], rows: [
+
+               ], rows: [
             for (int i = 0; i < plist.length; i++)
               DataRow(cells: [
-                DataCell(Text(plist[i].pinvonum.toString())),
+                // DataCell(Text(plist[i].pinvonum.toString())),
                 DataCell(Text(plist[i].pstdate)),
                 DataCell(Text(plist[i].sname)),
                 DataCell(Text(plist[i].mname)),
+                DataCell(Text(plist[i].quantity.toString())),
+                DataCell(Text(plist[i].rate.toString())),
+                DataCell(Text(plist[i].amount.toString())),
 
 
               ])
@@ -85,7 +98,7 @@ class _PurchasePageState extends State<PurchasePage> {
 
   Future<void> getPurchaseData() async {
     final res =
-    await _http.getData("http://192.168.0.106:8082/purchase/getAll");
+    await _http.getData("http://192.168.1.51:8082/purchase/getAll");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       var data = map['Data'] as List<dynamic>;

@@ -1,9 +1,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:smartpharma/page/login_page.dart';
 import 'package:smartpharma/screen/addcustomer.dart';
 import 'package:smartpharma/screen/addinvoice.dart';
 import 'package:smartpharma/screen/addmedicine.dart';
+import 'package:smartpharma/screen/addpurchase.dart';
 import 'package:smartpharma/screen/addsupplier.dart';
 import 'package:smartpharma/screen/invoices.dart';
 import 'package:smartpharma/screen/dashboard.dart';
@@ -52,7 +54,7 @@ class _HomePageState extends State<HomePage> {
     }else if (currentPage == DrawerSections.purchases) {
       container = PurchasePage();
     } else if (currentPage == DrawerSections.addpurchase) {
-      container = ReportPage();
+      container = AddpurchasePage();
     } else if (currentPage == DrawerSections.logout) {
       container =  SearchPage();
     }
@@ -110,8 +112,21 @@ class _HomePageState extends State<HomePage> {
           Divider(),
           menuItem(11, "AddPurchase", Icons.privacy_tip_outlined,
               currentPage == DrawerSections.addpurchase ? true : false),
-          menuItem(12, "Logout", Icons.feedback_outlined,
-              currentPage == DrawerSections.logout ? true : false),
+          // menuItem(12, "Logout", Icons.feedback_outlined,
+          //     currentPage == DrawerSections.logout ? true : false),
+          Padding(
+            padding: const EdgeInsets.only(left:20.0),
+            child: ListTile(
+              leading: Icon(Icons.logout_rounded),
+              title: Text('Logout'),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => LoginPage()));
+
+              },
+            ),
+          ),
+
         ],
       ),
     );

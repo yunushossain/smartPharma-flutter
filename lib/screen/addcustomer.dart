@@ -144,7 +144,7 @@ class _AddcustomerPageState extends State<AddcustomerPage> {
 
     try {
       final response =
-          await _http.postData('http://192.168.0.106:8082/customer/save', _body);
+          await _http.postData('http://192.168.1.51:8082/customer/save', _body);
 
       Fluttertoast.showToast(
           msg: "New Customer added Successfully",
